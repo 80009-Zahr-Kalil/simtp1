@@ -11,7 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Oswald:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
-    <p class="titulo">SIMULACIÓN TP 1</p>
+    <p class="titulo1">SIMULACIÓN TP 1</p>
+    <p class="titulo2">GENERADOR DE NÚMEROS ALEATORIOS</p>
     <hr>
     <br>
     <div class="input">
@@ -32,7 +33,7 @@
             m: <input type="text" class="completar1" size="5"> <br>
             a: <input type="text" class="completar1" size="5"> <br>
             c: <input type="text" class="completar1" size="5"> <br>
-            <button class="btn" onclick="calcular('completar1');">Generar</button>
+            <button class="btn" onclick="mostrar();">Generar</button>
         </div>
 
         <div class="metodo-multiplicativo display" style="display: none;">
@@ -43,8 +44,14 @@
             g: <input type="text" class="completar2" size="5"> <br>
             m: <input type="text" class="completar2" size="5"> <br>
             a: <input type="text" class="completar2" size="5"> <br>
-            <button class="btn" onclick="calcular('completar2');">Generar</button>
+            <button class="btn" onclick="mostrar();">Generar</button>
         </div>
+    </div>
+
+    <div class="output" style="display: none;">
+        <p>i número</p>
+        <hr width="200" color="black">
+        <div class="rellenar"></div>
     </div>
 
     <script

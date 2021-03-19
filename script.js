@@ -6,15 +6,19 @@ function metodo() {
     if(op == 0) {
         $(".metodo-multiplicativo").hide();
         $(".metodo-mixto").hide();
+        $(".output").hide();
     }
     if(op == 1) {
         $(".metodo-mixto").show();
         $(".metodo-multiplicativo").hide();
+        $(".output").hide();
     }
     if(op == 2) {
         $(".metodo-multiplicativo").show();
         $(".metodo-mixto").hide();
+        $(".output").hide();
     }
+    return op;
 }
 
 
@@ -22,6 +26,7 @@ function metodo() {
 function calcular(className) {
     var arr = document.getElementsByClassName(className);
     var datos = [];
+    var numeros = [];
     for(var i=0; i<arr.length; i++) {
         datos.push(Number(arr[i].value));
     }
@@ -42,8 +47,32 @@ function calcular(className) {
     
         // calculo el valor aleatorio
         var rnd = n2 / (m-1);
+        var redondeado = Number(rnd.toFixed(4));
     
-        console.log((i+1).toString(), ": ", Number(rnd.toFixed(4)));
+        //console.log((i+1).toString(), ": ", redondeado);
+        numeros.push([i+1, redondeado]);
         x0 = n2;
     }
+    return numeros;
+}
+
+// mostrar los datos en la pagina
+function mostrar() {
+    var op = metodo();
+    var nombreClase = "";
+    if(op == 1) {
+        nombreClase = "completar1";
+    }
+    if(op == 2) {
+        nombreClase = "completar2";
+    }
+
+    var numeros = calcular(nombreClase);
+    var cadena = "";
+    for(var i=0; i<numeros.length; i++) {
+        cadena += '<p>' + numeros[i][0] + ' ' + numeros[i][1] + '</p>';
+    }
+    
+    $(".rellenar").html(cadena);
+    $(".output").show();
 }
