@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIM - TP1</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sriracha&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Oswald:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <p class="titulo">SIMULACIÓN TP 1</p>
+    <hr>
+    <br>
+    <div class="input">
+        <p class="subtitulo">Elegí el método a utilizar</p>
+        <select id="selector" onchange="metodo();">
+            <option value="0">-- Seleccionar Método --</option>
+            <option value="1">Método Mixto</option>
+            <option value="2">Método Multiplicativo</option>
+        </select>
+        <br>
+        <br>
+        <div class="metodo-mixto display" style="display: none;">
+            <h3 style="text-align: center;"><bold>Método Congruencial Mixto</bold></h3>
+            Cantidad de registros: <input type="text" class="completar1" size="10"> <br>
+            x<sub>0</sub>: <input type="text" class="completar1" size="5"> <br>
+            k: <input type="text" class="completar1" size="5"> <br>
+            g: <input type="text" class="completar1" size="5"> <br>
+            m: <input type="text" class="completar1" size="5"> <br>
+            a: <input type="text" class="completar1" size="5"> <br>
+            c: <input type="text" class="completar1" size="5"> <br>
+            <button class="btn" onclick="calcular('completar1');">Generar</button>
+        </div>
+
+        <div class="metodo-multiplicativo display" style="display: none;">
+            <h3 style="text-align: center;"><bold>Método Congruencial Multiplicativo</bold></h3>
+            Cantidad de registros: <input type="text" class="completar2" size="10"> <br>
+            x<sub>0</sub>: <input type="text" class="completar2" size="5"> <br>
+            k: <input type="text" class="completar2" size="5"> <br>
+            g: <input type="text" class="completar2" size="5"> <br>
+            m: <input type="text" class="completar2" size="5"> <br>
+            a: <input type="text" class="completar2" size="5"> <br>
+            <button class="btn" onclick="calcular('completar2');">Generar</button>
+        </div>
+    </div>
+
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous">
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
