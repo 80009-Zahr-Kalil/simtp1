@@ -2,7 +2,6 @@
 function metodo() {
     var elem = document.getElementById("selector");
     var op = elem.value;
-    console.log(op)
 
     if(op == 0) {
         $(".metodo-multiplicativo").hide();
@@ -27,7 +26,6 @@ function calcular(className) {
         datos.push(Number(arr[i].value));
     }
     datos.push(0);
-    console.log(datos);
 
     var n = datos[0];
     var x0 = datos[1];
