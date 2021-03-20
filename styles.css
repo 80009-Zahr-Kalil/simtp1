@@ -54,7 +54,7 @@ body {
     color: #fff;
 }
 
-.output {
+.output .number-display{
     width: 200px;
     margin: auto;
     border: 2px solid rgb(58, 55, 55);
@@ -64,4 +64,12 @@ body {
 .output p {
     text-align: center;
     word-spacing: 120px;
+}
+
+.output .titulo-tabla {
+    color: white;
+}
+
+.output .buttons {
+    text-align: center;
 }

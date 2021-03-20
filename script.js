@@ -2,7 +2,7 @@
 function metodo() {
     var elem = document.getElementById("selector");
     var op = elem.value;
-
+    var nombreClase = "";
     if(op == 0) {
         $(".metodo-multiplicativo").hide();
         $(".metodo-mixto").hide();
@@ -12,13 +12,15 @@ function metodo() {
         $(".metodo-mixto").show();
         $(".metodo-multiplicativo").hide();
         $(".output").hide();
+        nombreClase = "completar1";
     }
     if(op == 2) {
         $(".metodo-multiplicativo").show();
         $(".metodo-mixto").hide();
         $(".output").hide();
+        nombreClase = "completar2";
     }
-    return op;
+    return nombreClase;
 }
 
 
@@ -58,14 +60,7 @@ function calcular(className) {
 
 // mostrar los datos en la pagina
 function mostrar() {
-    var op = metodo();
-    var nombreClase = "";
-    if(op == 1) {
-        nombreClase = "completar1";
-    }
-    if(op == 2) {
-        nombreClase = "completar2";
-    }
+    var nombreClase = metodo();
 
     var numeros = calcular(nombreClase);
     var cadena = "";
@@ -76,3 +71,4 @@ function mostrar() {
     $(".rellenar").html(cadena);
     $(".output").show();
 }
+
