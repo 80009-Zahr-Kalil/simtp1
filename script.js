@@ -1,4 +1,5 @@
 // seleccion de metodo
+
 function metodo() {
     var elem = document.getElementById("selector");
     var op = elem.value;
@@ -22,6 +23,10 @@ function metodo() {
     }
     return nombreClase;
 }
+
+/*
+CODIGO INEFICIENTE -> 1M registros = 17 segundos
+*/
 
 
 // calcular los numeros aleatorios
@@ -55,14 +60,15 @@ function calcular(className) {
         numeros.push([i+1, redondeado]);
         x0 = n2;
     }
-    return numeros;
+    //console.log(datos);
+    return [numeros, datos];
 }
 
-// mostrar los datos en la pagina
+// mostrar los datos en la pagina   CORREGIR! Mostrar() debe calcular una sola vez, no todo de nuevo.
 function mostrar() {
     var nombreClase = metodo();
 
-    var numeros = calcular(nombreClase);
+    var numeros = calcular(nombreClase)[0];
     var cadena = "";
     for(var i=0; i<numeros.length; i++) {
         cadena += '<p>' + numeros[i][0] + ' ' + numeros[i][1] + '</p>';
@@ -72,3 +78,33 @@ function mostrar() {
     $(".output").show();
 }
 
+function agregarRegistro() {
+    var nombreClase = metodo();
+    var datos = calcular(nombreClase)[1];
+    var registrosActuales = datos[0];
+    registrosActuales++;    
+    $("." + nombreClase)[0].value = registrosActuales;
+    calcular(nombreClase);
+    mostrar();
+}
+
+
+/*
+function calcular(x0, k, g, m, a, c) { 
+    var n1 = a * x0 + c;
+    
+    // calculo Xi+1
+    var n2 = n1 % m;
+
+    // calculo el valor aleatorio
+    var rnd = n2 / (m-1);
+    var redondeado = Number(rnd.toFixed(4));
+    console.log(redondeado);
+    x0 = n2;
+}
+
+calcular(6,3,3,8,13,7);*/
+
+/*
+Necesito tener dos funciones para calcular, la p
+*/
