@@ -54,11 +54,16 @@ body {
     color: #fff;
 }
 
+.output {
+    display: none;
+}
+
 .output .number-display{
     width: 200px;
     margin: auto;
     border: 2px solid rgb(58, 55, 55);
     font-family: 'Fjalla One', sans-serif;
+    color: white;
 }
 
 .output p {
@@ -66,10 +71,17 @@ body {
     word-spacing: 120px;
 }
 
-.output .titulo-tabla {
-    color: white;
+.output .titulo-tabla-izq, .output .izq{
+    float: left;
+    margin-left: 5px;
+}
+.output .titulo-tabla-der, .output .der {
+    float: right;
+    margin-right: 5px;
 }
 
 .output .buttons {
     text-align: center;
 }
+
+
