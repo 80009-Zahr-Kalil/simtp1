@@ -59,29 +59,116 @@ body {
 }
 
 .output .number-display{
-    width: 200px;
+    width: 30%;
     margin: auto;
     border: 2px solid rgb(58, 55, 55);
     font-family: 'Fjalla One', sans-serif;
     color: white;
+    background: rgb(197, 143, 42);
 }
 
-.output p {
-    text-align: center;
-    word-spacing: 120px;
-}
-
-.output .titulo-tabla-izq, .output .izq{
+.output .titulo-tabla {
+    background: rgb(221, 221, 32);
+    width: 100%;
     float: left;
-    margin-left: 5px;
+    text-align: center;
+    word-spacing: 300px;
+    color: black;
+    padding: 10px 0;
 }
-.output .titulo-tabla-der, .output .der {
-    float: right;
-    margin-right: 5px;
+
+.output .rellenar {
+    text-align: center;
+    word-spacing: 300px;
+}
+
+.nuevos-registros {
+    color: red;
 }
 
 .output .buttons {
     text-align: center;
 }
 
+@media (max-width: 1500px) {
+    .output .number-display {
+        width: 35%;
+    }
+    .output .titulo-tabla {
+        word-spacing: 300px;
+    }
+    .output .rellenar {
+        word-spacing: 300px;
+    }
+}
 
+@media (max-width: 1300px) {
+    .output .number-display {
+        width: 40%;
+    }
+    .output .titulo-tabla {
+        word-spacing: 250px;
+    }
+    .output .rellenar {
+        word-spacing: 250px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .output .number-display {
+        width: 50%;
+    }
+    .output .titulo-tabla {
+        word-spacing: 200px;
+    }
+    .output .rellenar {
+        word-spacing: 200px;
+    }
+    .titulo1 {
+        font-size: 35px;
+    }
+}
+
+@media (max-width: 800px) {
+    .output .number-display {
+        width: 60%;
+    }
+    .output .titulo-tabla {
+        word-spacing: 150px;
+    }
+    .output .rellenar {
+        word-spacing: 150px;
+    }
+    .titulo1 {
+        font-size: 30px;
+    }
+    .titulo2 {
+        font-size: 15px;
+    }
+    .subtitulo {
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 550px) {
+    .output .number-display {
+        width: 80%;
+    }
+    .output .titulo-tabla {
+        word-spacing: 150px;
+    }
+    .output .rellenar {
+        word-spacing: 150px;
+    }
+    .titulo1 {
+        font-size: 25px;
+        letter-spacing: 2px;
+    }
+    .subtitulo {
+        font-size: 20px;
+    }
+    .btn {
+        font-size: 14px;
+        margin: 10px;
+    }
+}
