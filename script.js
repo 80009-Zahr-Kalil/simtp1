@@ -4,11 +4,17 @@ var x0Actual;
 var registrosActuales;
 var element = document.getElementsByClassName("rellenar")[0];
 var listaNumeros = [];
+var tablaChiCuadrado = [3.841, 5.991, 7.815, 9.488, 11.070, 12.592, 14.067, 
+                        15.507, 16.919, 18.307, 19.675, 21.026, 22.362, 
+                        23.685, 24.996, 26.296, 27.587, 28.869, 30.144, 
+                        31.410, 32.671, 33.924, 35.172, 36.415, 37.652, 
+                        38.885, 40.113, 41.337, 42.557, 43.773];
 
 
 
 // FUNCIONES //////////////////////////////////////////////////
 
+// INCISO a)
 
 // Obtiene la opción elegida por el usuario.
 function metodo() {
@@ -146,21 +152,20 @@ function agregarRegistro() {
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
+// INCISOS b) Y c)
 
 // Obtener Intervalos.
 function obtenerIntervalos(subintervalos) {
     var amplitud = 100 / subintervalos;
     var listaIntervalos = [];
-    var cierre = -1;
+    var cierre = -0.01;
     for(var i=1; i<=subintervalos; i++) {
-        var inicio = cierre + 1;
+        var inicio = cierre + 0.01 ;
         cierre = (amplitud * i - 1) + 0.99;
         listaIntervalos.push([inicio, cierre]);
     }
     return listaIntervalos;
 }
-
 
 
 // Calcula cuantas apariciones hubo en un determinado intervalo.
@@ -190,10 +195,9 @@ function obtenerEstadistico(frecuenciasObservadas, frecuenciaEsperada) {
         var n2 = n1 / frecuenciaEsperada;
         estadistico += n2;
     }
-    console.log(estadistico);
+    //console.log(estadistico);
     return estadistico;
 }
-
 
 // Obtenemos la tabla de frecuencias.
 function chiCuadrado() {
@@ -218,3 +222,26 @@ function calcularChiCuadrado() {
         $(".estadistico").show();
     }
 }
+
+
+// FUNCION SCROLL DOWN
+ $(function() {
+    $('.scroll-down').click (function() {
+      $('html, body').animate({scrollTop: $('section.ok').offset().top }, 'slow');
+      return false;
+    });
+  });
+
+  $(function() {
+    $('.btnChi').click (function() {
+      $('html, body').animate({scrollTop: $('section.ok').offset().top }, 'slow');
+      return false;
+    });
+  });
+
+  $(function() {
+    $('.btn2').click (function() {
+      $('html, body').animate({scrollTop: $('section.ok').offset().top }, 'slow');
+      return false;
+    });
+  });
