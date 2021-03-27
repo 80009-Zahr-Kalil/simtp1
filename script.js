@@ -126,6 +126,7 @@ function mostrar() {
     $(".rellenar").html(cadena);
     $(".output").show();
     $(".chiCuadrado").hide();
+    $(".scroll").show();
     console.log("MOSTRAR -> " + (Date.now()-start));
 }
 
@@ -199,6 +200,7 @@ function obtenerEstadistico(frecuenciasObservadas, frecuenciaEsperada) {
     return estadistico;
 }
 
+
 // Obtenemos la tabla de frecuencias.
 function chiCuadrado() {
     if(listaNumeros.length < 30) {
@@ -218,8 +220,17 @@ function calcularChiCuadrado() {
         var sumatoriaFrecuenciasObservadas = frecuenciasObservadas.reduce(function(a, b) {return a+b});
         var frecuenciaEsperada = sumatoriaFrecuenciasObservadas / subintervalos;
         var estadistico = obtenerEstadistico(frecuenciasObservadas, frecuenciaEsperada);
-        $(".estadistico").html("ESTADISTICO: " + Number(estadistico.toFixed(4)));
+        $(".estadistico").html("ESTADÍSTICO: " + Number(estadistico.toFixed(4)));
         $(".estadistico").show();
+        var conclusion = "";
+        var valorAComparar = tablaChiCuadrado[subintervalos-2]
+        if(estadistico < valorAComparar) {
+            conclusion = "Valor en la Tabla: " + valorAComparar + "<br> No rechazamos la hipótesis nula";
+        } else {
+            conclusion = "Valor en la Tabla: " + valorAComparar + "<br> Rechazamos la hipótesis nula";
+        }
+        $(".hipotesisNula").html(conclusion);
+        $(".hipotesisNula").show();
     }
 }
 
