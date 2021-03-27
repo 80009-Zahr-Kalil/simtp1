@@ -3,6 +3,7 @@ var constantes = [];
 var x0Actual;
 var registrosActuales;
 var element = document.getElementsByClassName("rellenar")[0];
+var listaNumeros = [];
 
 
 
@@ -82,19 +83,24 @@ function calcular(arr) {
 function primerosRegistros() {
     const start = Date.now()
     constantes = obtenerValores();
+    //var listaNumeros = [];
     var cantidadRegistros = constantes[0];
-    var listaNumeros = [];
     for(var i=0; i<cantidadRegistros; i++) {
         var numero = calcular(constantes);
+        if(numero == 1) {
+            numero = 0.9999;
+        }
         listaNumeros.push(numero);
     }
     console.log("PRIMEROS REGISTROS -> " + (Date.now()-start));
+    console.log(listaNumeros)
     return listaNumeros;
 }
 
 
 // Muestra la tabla con los números pseudo aleatorios generados.
 function mostrar() {
+    listaNumeros = [];
     var arr = primerosRegistros();
     var cadena = "";
     const start = Date.now();
@@ -103,7 +109,7 @@ function mostrar() {
         if (arr[i] == 0) {
             numeroRandom = '0.0000';
         } else {
-            if (arr[i] == 1) {
+            if (arr[i] == 0.9999) {
                 numeroRandom = '1.0000';
             } else {
                 numeroRandom = arr[i];
@@ -113,6 +119,7 @@ function mostrar() {
     }
     $(".rellenar").html(cadena);
     $(".output").show();
+    $(".chiCuadrado").hide();
     console.log("MOSTRAR -> " + (Date.now()-start));
 }
 
@@ -121,14 +128,93 @@ function mostrar() {
 function agregarRegistro() {
     registrosActuales++;
     var nuevoNumeroRandom = calcular(constantes);
+    var numeroMostrado = nuevoNumeroRandom;
     if (nuevoNumeroRandom == 0) {
-        nuevoNumeroRandom = "0.0000";
+        numeroMostrado = "0.0000";
     }
     if(nuevoNumeroRandom == 1) {
-        nuevoNumeroRandom = "1.0000";
+        numeroMostrado = "1.0000";
+        nuevoNumeroRandom = 0.9999;
     }
-    var cadena = '<div class="nuevos-registros">' + (registrosActuales)  + ' ' + nuevoNumeroRandom + '</div>';
+    listaNumeros.push(nuevoNumeroRandom);
+    var cadena = '<div class="nuevos-registros">' + (registrosActuales)  + ' ' + numeroMostrado + '</div>';
     document.getElementsByClassName("rellenar")[0].insertAdjacentHTML('beforeend', cadena);
     $(".output").show();
 }
 
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+// Obtener Intervalos.
+function obtenerIntervalos(subintervalos) {
+    var amplitud = 100 / subintervalos;
+    var listaIntervalos = [];
+    var cierre = -1;
+    for(var i=1; i<=subintervalos; i++) {
+        var inicio = cierre + 1;
+        cierre = (amplitud * i - 1) + 0.99;
+        listaIntervalos.push([inicio, cierre]);
+    }
+    return listaIntervalos;
+}
+
+
+
+// Calcula cuantas apariciones hubo en un determinado intervalo.
+function frecuencia(listaNumeros, listaIntervalos) {
+    var frecuencias = [];
+    for(var i=0; i<listaIntervalos.length; i++) {
+        frecuencias.push(0);
+    }
+    for(var i=0; i<listaNumeros.length; i++) {
+        for(var j=0; j<listaIntervalos.length; j++) {
+            if(listaNumeros[i]*100 >= listaIntervalos[j][0] && listaNumeros[i]*100 <= listaIntervalos[j][1]) {
+                frecuencias[j]++;
+                break;
+            }
+        }
+    }
+    return frecuencias;
+}
+
+
+// Obtenemos el valor del estadistico a partir de la prueba de Chi Cuadrado.
+function obtenerEstadistico(frecuenciasObservadas, frecuenciaEsperada) {
+    var estadistico = 0;
+    console.log(frecuenciasObservadas);
+    for(var i=0; i<frecuenciasObservadas.length; i++) {
+        var n1 = (frecuenciasObservadas[i] - frecuenciaEsperada)**2;
+        var n2 = n1 / frecuenciaEsperada;
+        estadistico += n2;
+    }
+    console.log(estadistico);
+    return estadistico;
+}
+
+
+// Obtenemos la tabla de frecuencias.
+function chiCuadrado() {
+    if(listaNumeros.length < 30) {
+        alert("Para efectuar la prueba de Chi Cuadrado se necesitan como mínimo 30 números aleatorios");
+    } else {
+        $(".chiCuadrado").show();
+    }
+}
+
+// El valor del estadistico se despliega en pantalla.
+function calcularChiCuadrado() {
+    var elem = document.getElementsByClassName("subintervalos");
+    var subintervalos = Number(elem[0].value);
+    if(subintervalos > 0) {
+        var listaIntervalos = obtenerIntervalos(subintervalos);
+        var frecuenciasObservadas = frecuencia(listaNumeros, listaIntervalos);
+        var sumatoriaFrecuenciasObservadas = frecuenciasObservadas.reduce(function(a, b) {return a+b});
+        var frecuenciaEsperada = sumatoriaFrecuenciasObservadas / subintervalos;
+        var estadistico = obtenerEstadistico(frecuenciasObservadas, frecuenciaEsperada);
+        $(".estadistico").html("ESTADISTICO: " + Number(estadistico.toFixed(4)));
+        $(".estadistico").show();
+    }
+}

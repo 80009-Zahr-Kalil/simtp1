@@ -90,6 +90,30 @@ body {
     text-align: center;
 }
 
+.chiCuadrado {
+    display: none;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 20px;
+}
+
+.btn2:hover {
+    background-color: #2bc852;
+    box-shadow: 0px 15px 20px rgba(23, 105, 78, 0.4);
+    color: #fff;
+}
+
+.estadistico {
+    display: none;
+    width: 60%;
+    margin: 0 auto;
+    background: rgb(184, 18, 18);
+    border-radius: 20px;
+    padding: 10px;
+}
+
 @media (max-width: 1500px) {
     .output .number-display {
         width: 35%;
@@ -172,3 +196,29 @@ body {
         margin: 10px;
     }
 }
+
+@media (max-width: 400px) {
+    .output .number-display {
+        width: 90%;
+    }
+    .output .titulo-tabla {
+        word-spacing: 100px;
+    }
+    .output .rellenar {
+        word-spacing: 100px;
+    }
+}
+
+@media (max-width: 300px) {
+    .output .number-display {
+        width: 95%;
+    }
+    .output .titulo-tabla {
+        word-spacing: 50px;
+    }
+    .output .rellenar {
+        word-spacing: 50px;
+    }
+}
+
+
