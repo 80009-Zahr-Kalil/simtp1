@@ -121,9 +121,9 @@ function mostrar() {
                 numeroRandom = arr[i];
             }
         }
-        cadena += '<div>' + (i+1)  + ' ' + numeroRandom + '</div>';
+        cadena += '<tr><td>' + (i+1)  + '</td><td>' + numeroRandom + '</td></tr>';
     }
-    $(".rellenar").html(cadena);
+    document.getElementById("rellenar").insertAdjacentHTML('beforeend', cadena);
     $(".output").show();
     $(".chiCuadrado").hide();
     $(".scroll").show();
@@ -144,8 +144,8 @@ function agregarRegistro() {
         nuevoNumeroRandom = 0.9999;
     }
     listaNumeros.push(nuevoNumeroRandom);
-    var cadena = '<div class="nuevos-registros">' + (registrosActuales)  + ' ' + numeroMostrado + '</div>';
-    document.getElementsByClassName("rellenar")[0].insertAdjacentHTML('beforeend', cadena);
+    var cadena = '<tr><td class="nuevos-registros">' + (registrosActuales)  + '</td><td class="nuevos-registros">' + numeroMostrado + '</td></tr>';
+    document.getElementById("rellenar").insertAdjacentHTML('beforeend', cadena);
     $(".output").show();
 }
 
@@ -222,12 +222,12 @@ function calcularChiCuadrado() {
         var estadistico = obtenerEstadistico(frecuenciasObservadas, frecuenciaEsperada);
         $(".estadistico").html("ESTADÍSTICO: " + Number(estadistico.toFixed(4)));
         $(".estadistico").show();
-        var conclusion = "";
+        var conclusion = "Valor en la Tabla: ";
         var valorAComparar = tablaChiCuadrado[subintervalos-2]
         if(estadistico < valorAComparar) {
-            conclusion = "Valor en la Tabla: " + valorAComparar + "<br> No rechazamos la hipótesis nula";
+            conclusion += valorAComparar + "<br> No rechazamos la hipótesis nula";
         } else {
-            conclusion = "Valor en la Tabla: " + valorAComparar + "<br> Rechazamos la hipótesis nula";
+            conclusion += valorAComparar + "<br> Rechazamos la hipótesis nula";
         }
         $(".hipotesisNula").html(conclusion);
         $(".hipotesisNula").show();
@@ -252,6 +252,13 @@ function calcularChiCuadrado() {
 
   $(function() {
     $('.btn2').click (function() {
+      $('html, body').animate({scrollTop: $('section.ok').offset().top }, 'slow');
+      return false;
+    });
+  });
+
+  $(function() {
+    $('.btnAgregar').click (function() {
       $('html, body').animate({scrollTop: $('section.ok').offset().top }, 'slow');
       return false;
     });

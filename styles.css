@@ -1,7 +1,10 @@
 body {
     margin: 40px;
     padding: 0;
-    background: rgb(101, 121, 138);
+    /*background: rgb(101, 121, 138);*/
+    background: rgb(36, 33, 33);
+    color: white;
+    font-family: 'Poppins', sans-serif;
 }
 
 .titulo1 {
@@ -11,20 +14,31 @@ body {
     text-align: center;
 }
 .titulo2 {
-    font-family: 'Roboto', sans-serif;
+    /*font-family: 'Roboto', sans-serif;*/
     font-size: 20px;
     letter-spacing: 5px;
     text-align: center;
 }
 
 .subtitulo {
-    font-family: 'Sriracha', cursive;
+    /*font-family: 'Roboto', sans-serif;*/
     font-size: 30px;
     letter-spacing: 2px;
 }
 
+select {
+    background: rgb(22, 88, 143);
+    /*font-family: 'Roboto', sans-serif;*/
+    font-size: 15px;
+    padding: 5px 0;
+    letter-spacing: 1px;
+    border-color: white;
+    border-radius: 5px;
+    color: white;
+}
+
 .display {
-    font-family: 'Fjalla One', sans-serif;
+    /*font-family: 'Fjalla One', sans-serif;*/
     letter-spacing: 3px;
     font-size: 18px;
 }
@@ -59,28 +73,41 @@ body {
 }
 
 .output .number-display{
+    font-family: 'Fjalla One', sans-serif;
     width: 30%;
     margin: auto;
-    border: 2px solid rgb(58, 55, 55);
-    font-family: 'Fjalla One', sans-serif;
-    color: white;
     background: rgb(197, 143, 42);
+    text-align: center;
+    border-collapse: collapse;
 }
 
-.output .titulo-tabla {
-    background: rgb(221, 221, 32);
-    width: 100%;
-    float: left;
-    text-align: center;
-    word-spacing: 300px;
+td, th {
+    border: 1px solid #0c0c0c;
+    padding: 8px;
+}
+th {
+    background: rgb(206, 206, 35);
     color: black;
-    padding: 10px 0;
 }
 
-.output .rellenar {
-    text-align: center;
-    word-spacing: 300px;
+.referencias {
+    width: 30%;
+    margin: 0 auto;
 }
+.box {
+    float: left;
+  height: 20px;
+  width: 20px;
+  margin-bottom: 15px;
+  border: 1px solid black;
+  clear: both;
+}
+.referencia-blanco {
+    background-color: white;
+}
+.referencia-rojo {
+    background-color: red;
+  }
 
 .nuevos-registros {
     color: red;
@@ -93,9 +120,7 @@ body {
 .chiCuadrado {
     display: none;
     text-align: center;
-    font-family: 'Roboto', sans-serif;
     font-size: 20px;
-    font-weight: bold;
     margin: 20px;
 }
 
@@ -107,16 +132,16 @@ body {
 
 .estadistico {
     display: none;
-    width: 60%;
+    color: whitesmoke;
+    width: 30%;
     margin: 0 auto;
-    background: rgb(184, 18, 18);
-    border-radius: 20px;
+    background: rgb(136, 38, 38);
+    border-radius: 30px;
     padding: 10px;
 }
 
 .hipotesisNula {
     display: none;
-    font-family: 'Roboto', sans-serif;
     margin: 20px;
 }
 
@@ -124,11 +149,8 @@ body {
     .output .number-display {
         width: 35%;
     }
-    .output .titulo-tabla {
-        word-spacing: 300px;
-    }
-    .output .rellenar {
-        word-spacing: 300px;
+    .estadistico {
+        width: 35%;
     }
 }
 
@@ -136,11 +158,8 @@ body {
     .output .number-display {
         width: 40%;
     }
-    .output .titulo-tabla {
-        word-spacing: 250px;
-    }
-    .output .rellenar {
-        word-spacing: 250px;
+    .estadistico {
+        width: 40%;
     }
 }
 
@@ -148,26 +167,17 @@ body {
     .output .number-display {
         width: 50%;
     }
-    .output .titulo-tabla {
-        word-spacing: 200px;
-    }
-    .output .rellenar {
-        word-spacing: 200px;
-    }
     .titulo1 {
         font-size: 35px;
+    }
+    .estadistico {
+        width: 50%;
     }
 }
 
 @media (max-width: 800px) {
     .output .number-display {
         width: 60%;
-    }
-    .output .titulo-tabla {
-        word-spacing: 150px;
-    }
-    .output .rellenar {
-        word-spacing: 150px;
     }
     .titulo1 {
         font-size: 30px;
@@ -178,17 +188,14 @@ body {
     .subtitulo {
         font-size: 25px;
     }
+    .estadistico {
+        width: 60%;
+    }
 }
 
 @media (max-width: 550px) {
     .output .number-display {
         width: 80%;
-    }
-    .output .titulo-tabla {
-        word-spacing: 150px;
-    }
-    .output .rellenar {
-        word-spacing: 150px;
     }
     .titulo1 {
         font-size: 25px;
@@ -201,17 +208,17 @@ body {
         font-size: 14px;
         margin: 10px;
     }
+    .estadistico {
+        width: 80%;
+    }
 }
 
 @media (max-width: 400px) {
     .output .number-display {
         width: 90%;
     }
-    .output .titulo-tabla {
-        word-spacing: 100px;
-    }
-    .output .rellenar {
-        word-spacing: 100px;
+    .estadistico {
+        width: 90%;
     }
 }
 
@@ -219,11 +226,8 @@ body {
     .output .number-display {
         width: 95%;
     }
-    .output .titulo-tabla {
-        word-spacing: 50px;
-    }
-    .output .rellenar {
-        word-spacing: 50px;
+    .estadistico {
+        width: 95%;
     }
 }
 

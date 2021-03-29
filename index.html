@@ -9,6 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Sriracha&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Oswald:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
 <body>
     <p class="titulo1">SIMULACIÓN TP 1</p>
@@ -49,21 +51,29 @@
     </div>
 
     <div class="output">
-        <div class="number-display">
-            <div class="titulo-tabla">i número</div>
-            <hr color="black">
-            <div class="rellenar"></div>
+        <table id="rellenar" class="number-display animate__animated animate__zoomIn">
+            <tr class="titulo-tabla">
+                <th>i</th>
+                <th>número</th>
+            </tr>
+        </table>
+        <br>
+        <div class="referencias">
+            <div><div class="box referencia-blanco"></div> Registros Originales</div>
+            <br>
+            <div><div class="box referencia-rojo"></div> Registros Nuevos</div>
         </div>
+        <br>
         <div class="buttons">
-            <button class="btn" onclick="agregarRegistro();">Agregar Registro</button>
+            <button class="btn btnAgregar" onclick="agregarRegistro();">Agregar Registro</button>
             <button class="btn">Graficar</button>
             <button class="btn btnChi" onclick="chiCuadrado();">Chi Cuadrado</button>
         </div>
         <br>
-        <div class="chiCuadrado">
+        <div class="chiCuadrado animate__animated animate__bounce">
             Cantidad de Subintervalos: <input type="text" class="subintervalos" size="2">
             <button class="btn btn2" onclick="calcularChiCuadrado();">Calcular</button>
-            <div class="estadistico"></div>
+            <div class="estadistico animate__animated animate__flipInX"></div>
             <div class="hipotesisNula"></div>
         </div>
     </div>
