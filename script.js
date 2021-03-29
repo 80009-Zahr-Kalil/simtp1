@@ -108,7 +108,7 @@ function primerosRegistros() {
 function mostrar() {
     listaNumeros = [];
     var arr = primerosRegistros();
-    var cadena = "";
+    var cadena = "<tr class='titulo-tabla'><th>i</th><th>número</th></tr>";
     const start = Date.now();
     for(var i=0; i<arr.length; i++) {
         var numeroRandom;
@@ -123,7 +123,7 @@ function mostrar() {
         }
         cadena += '<tr><td>' + (i+1)  + '</td><td>' + numeroRandom + '</td></tr>';
     }
-    document.getElementById("rellenar").insertAdjacentHTML('beforeend', cadena);
+    $("#rellenar").html(cadena);
     $(".output").show();
     $(".chiCuadrado").hide();
     $(".scroll").show();
