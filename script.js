@@ -16,6 +16,13 @@ var tablaChiCuadrado = [3.841, 5.991, 7.815, 9.488, 11.070, 12.592, 14.067,
 
 // INCISO a)
 
+// Desplegar input generador
+function mostrarGenerador() {
+    $(".inputGenerador").show();
+    $(".inputChiCuadrado").hide();
+}
+
+
 // Obtiene la opción elegida por el usuario.
 function metodo() {
     var elem = document.getElementById("selector");
@@ -38,6 +45,8 @@ function metodo() {
         $(".output").hide();
         nombreClase = "completar2";
     }
+
+    //$('html, body').animate({scrollTop: $('section.ok').offset().top }, 'slow');
     return nombreClase;
 }
 
@@ -155,6 +164,30 @@ function agregarRegistro() {
 
 // INCISOS b) Y c)
 
+// Desplegar input Chi cuadrado
+function mostrarChiCuadrado() {
+    $(".inputGenerador").hide();
+    $(".inputChiCuadrado").show();
+}
+
+
+// Generar los numeros pseudo aleatorios con el metodo de JS.
+/*
+function geneararJavaScript() {
+    var cantidadNumeros = document.getElementById("numerosChiCuadrado").value;
+    var subintervalos = document.getElementById("subintervalosChiCuadrado").value;
+    var listaJavaScript = [];
+    if(cantidadNumeros < 30) {
+        alert("Para efectuar la prueba de Chi Cuadrado se necesitan como mínimo 30 números aleatorios");
+    } else {
+        for(var i=0; i<cantidadNumeros; i++) {
+            var numAleatorioJS = Math.random().toFixed(4);
+            listaJavaScript.push(numAleatorioJS);
+        }
+        console.log(listaJavaScript);
+    }
+}*/
+
 // Obtener Intervalos.
 function obtenerIntervalos(subintervalos) {
     var amplitud = 100 / subintervalos;
@@ -210,6 +243,7 @@ function chiCuadrado() {
     }
 }
 
+//var subintervalos = document.getElementById("subintervalos").value;
 // El valor del estadistico se despliega en pantalla.
 function calcularChiCuadrado() {
     var elem = document.getElementsByClassName("subintervalos");
@@ -234,8 +268,10 @@ function calcularChiCuadrado() {
     }
 }
 
+//document.getElementById("btnChi").addEventListener("click", calcularChiCuadrado(listaNumeros, subintervalos), false);
 
 // FUNCION SCROLL DOWN
+
  $(function() {
     $('.scroll-down').click (function() {
       $('html, body').animate({scrollTop: $('section.ok').offset().top }, 'slow');
@@ -263,3 +299,18 @@ function calcularChiCuadrado() {
       return false;
     });
   });
+
+  $(function() {
+    $('.btnGenerador').click (function() {
+      $('html, body').animate({scrollTop: $('section.ok').offset().top }, 'slow');
+      return false;
+    });
+  });
+
+
+
+  // VANILLA TILT EFFECT
+VanillaTilt.init(document.querySelectorAll(".box"), {
+    max: 25,
+    speed: 400
+});

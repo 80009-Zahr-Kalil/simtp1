@@ -1,11 +1,12 @@
 body {
     margin: 40px;
     padding: 0;
-    /*background: rgb(101, 121, 138);*/
-    background: rgb(36, 33, 33);
+    background: #131313;
     color: white;
     font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
 }
+
 
 .titulo1 {
     font-family: 'Rubik Mono One', sans-serif;
@@ -14,21 +15,88 @@ body {
     text-align: center;
 }
 .titulo2 {
-    /*font-family: 'Roboto', sans-serif;*/
     font-size: 20px;
     letter-spacing: 5px;
     text-align: center;
 }
 
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    transform-style: preserve-3d;
+}
+
+.container .box {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    margin: 40px;
+    background: #232323;
+    border-radius: 20px;
+    transform-style: preserve-3d;
+    text-align: center;
+}
+
+.container .box .name {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 20px;
+    text-align: center;
+    width: 100%;
+    transform-style: preserve-3d;
+    transform: translate3d(0, 0, 75px);
+    transition: 0.5s;
+    opacity: 0;
+    z-index: 10;
+}
+.container .box:hover .name {
+    top: 10px;
+    opacity: 1;
+}
+
+.container .box .btn {
+    position: absolute;
+    bottom: 0;
+    margin: 0 auto;
+    transform-style: preserve-3d;
+    transform: translate3d(-50%, 0, 75px);
+    transition: 0.5s;
+    opacity: 0;
+    z-index: 10;
+}
+.container .box:hover .btn {
+    bottom: 20px;
+    opacity: 1;
+}
+
+.container .box .foto {
+    position: absolute;
+    width: 200px;
+    height: 235px;
+    top: 50%;
+    left: 50%;
+    max-width: 300px;
+    z-index: 11;
+    transform-style: preserve-3d;
+    transform: translate3d(-50%, -42%, 0px);
+}
+
+.inputGenerador, .inputChiCuadrado{
+    display: none;
+}
+
 .subtitulo {
-    /*font-family: 'Roboto', sans-serif;*/
     font-size: 30px;
     letter-spacing: 2px;
 }
 
 select {
     background: rgb(22, 88, 143);
-    /*font-family: 'Roboto', sans-serif;*/
     font-size: 15px;
     padding: 5px 0;
     letter-spacing: 1px;
@@ -38,9 +106,12 @@ select {
 }
 
 .display {
-    /*font-family: 'Fjalla One', sans-serif;*/
     letter-spacing: 3px;
     font-size: 18px;
+}
+
+.metodo-mixto, .metodo-multiplicativo {
+    display: none;
 }
 
 .option:hover {
@@ -94,13 +165,13 @@ th {
     width: 30%;
     margin: 0 auto;
 }
-.box {
+.square {
     float: left;
-  height: 20px;
-  width: 20px;
-  margin-bottom: 15px;
-  border: 1px solid black;
-  clear: both;
+    height: 20px;
+    width: 20px;
+    margin-bottom: 15px;
+    border: 1px solid black;
+    clear: both;
 }
 .referencia-blanco {
     background-color: white;
@@ -232,26 +303,26 @@ th {
 }
 
 
-
 section {
     height: 0vh;
     width: 100%;
     display: table;
     
   }
-  section.ok{
+section.ok{
     background-color: rgb(101, 121, 138);
     height: 0px;
-  }
-  
-  
-  .scroll-down {
+}
+
+.scroll {
+    display: none;
+    height: 100%;
+}
+
+.scroll-down {
     opacity: 1;
     -webkit-transition: all .5s ease-in 3s;
     transition: all .5s ease-in 3s;
-  }
-  
-  .scroll-down {
     position: absolute;
     bottom: 30px;
     left: 50%;
@@ -264,13 +335,13 @@ section {
     border-radius: 50%;
     z-index: 2;
     -webkit-animation: bounce 2s infinite 2s;
-    animation: bounce 2s infinite 2s;
+    animation: bounce 2s infinite 0s;
     -webkit-transition: all .2s ease-in;
     transition: all .2s ease-in;
     background: rgb(42, 231, 190);
-  }
+}
   
-  .scroll-down:before {
+.scroll-down:before {
       position: absolute;
       top: calc(50% - 8px);
       left: calc(50% - 6px);
@@ -281,9 +352,9 @@ section {
       content: "";
       border: 2px solid black;
       border-width: 0px 0 2px 2px;
-  }
+}
   
-  @keyframes bounce {
+@keyframes bounce {
     0%,
     100%,
     20%,
@@ -303,4 +374,4 @@ section {
       -ms-transform: translateY(-5px);
       transform: translateY(-5px);
     }
-  }
+}

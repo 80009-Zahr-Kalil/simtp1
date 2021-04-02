@@ -14,10 +14,31 @@
 </head>
 <body>
     <p class="titulo1">SIMULACIÓN TP 1</p>
-    <p class="titulo2">GENERADOR DE NÚMEROS ALEATORIOS</p>
     <hr>
     <br>
-    <div class="input">
+    <div class="container">
+        <div class="box">
+            <h2 class="name">Generador de números pseudo aleatorios</h2>
+            <button class="btn btnGenerador" onclick="mostrarGenerador();">GENERADOR</button>
+            <img src="./imagenes/tabla.png" class="foto">
+        </div>
+        <div class="box">
+            <h2 class="name">Efectuar prueba de Chi-Cuadrado</h2>
+            <button class="btn btnChi" onclick="mostrarChiCuadrado();">CHI CUADRADO</button>
+            <img src="./imagenes/histograma.png" class="foto">
+        </div>
+    </div>
+
+    <div class="inputChiCuadrado animate__animated animate__fadeIn display">
+        <p class="titulo2">PRUEBA DE CHI-CUADRADO</p>
+        <h5>En esta prueba se generarán números pseudo aleatorios con el método propio de JavaScript</h5> <br>
+        Cantidad de números pseudo aleatorios: <input type="text" size="3" id="numerosChiCuadrado"> <br>
+        Cantidad de subintervalos: <input type="text" size="3" id="subintervalosChiCuadrado"> <br>
+        <button class="btn" onclick="geneararJavaScript()">Generar</button>
+    </div>
+
+    <div class="inputGenerador animate__animated animate__fadeIn">
+        <p class="titulo2">GENERADOR DE NÚMEROS ALEATORIOS</p>
         <p class="subtitulo">Elegí el método a utilizar</p>
         <select id="selector" onchange="metodo();">
             <option value="0">-- Seleccionar Método --</option>
@@ -26,7 +47,7 @@
         </select>
         <br>
         <br>
-        <div class="metodo-mixto display" style="display: none;">
+        <div class="metodo-mixto display">
             <h3 style="text-align: center;"><bold>Método Congruencial Mixto</bold></h3>
             Cantidad de números pseudo aleatorios: <input type="text" class="completar1" size="6"> <br>
             x<sub>0</sub>: <input type="text" class="completar1" size="5"> <br>
@@ -38,7 +59,7 @@
             <button class="btn" onclick="mostrar();">Generar</button>
         </div>
 
-        <div class="metodo-multiplicativo display" style="display: none;">
+        <div class="metodo-multiplicativo display">
             <h3 style="text-align: center;"><bold>Método Congruencial Multiplicativo</bold></h3>
             Cantidad de números pseudo aleatorios: <input type="text" class="completar2" size="6"> <br>
             x<sub>0</sub>: <input type="text" class="completar2" size="3"> <br>
@@ -56,14 +77,13 @@
         </table>
         <br>
         <div class="referencias">
-            <div><div class="box referencia-blanco"></div> Registros Originales</div>
+            <div><div class="square referencia-blanco"></div> Registros Originales</div>
             <br>
-            <div><div class="box referencia-rojo"></div> Registros Nuevos</div>
+            <div><div class="square referencia-rojo"></div> Registros Nuevos</div>
         </div>
         <br>
         <div class="buttons">
             <button class="btn btnAgregar" onclick="agregarRegistro();">Agregar Registro</button>
-            <button class="btn">Graficar</button>
             <button class="btn btnChi" onclick="chiCuadrado();">Chi Cuadrado</button>
         </div>
         <br>
@@ -75,7 +95,7 @@
         </div>
     </div>
 
-    <section class="scroll" style="display: none;">
+    <section class="scroll">
         <a href="#" class="scroll-down" address="true"></a>
     </section>
     <section class="ok"></section>
@@ -85,6 +105,7 @@
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
         crossorigin="anonymous">
     </script>
+    <script src="vanilla-tilt.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
