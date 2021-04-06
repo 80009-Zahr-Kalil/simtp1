@@ -139,11 +139,11 @@ select {
     color: #fff;
 }
 
-.output {
+.outputGenerador {
     display: none;
 }
 
-.output .number-display{
+.outputGenerador .number-display, .outputChiCuadrado .number-display{
     font-family: 'Fjalla One', sans-serif;
     width: 30%;
     margin: auto;
@@ -184,7 +184,7 @@ th {
     color: red;
 }
 
-.output .buttons {
+.outputGenerador .buttons {
     text-align: center;
 }
 
@@ -202,7 +202,6 @@ th {
 }
 
 .estadistico {
-    display: none;
     color: whitesmoke;
     width: 30%;
     margin: 0 auto;
@@ -212,12 +211,11 @@ th {
 }
 
 .hipotesisNula {
-    display: none;
     margin: 20px;
 }
 
 @media (max-width: 1500px) {
-    .output .number-display {
+    .outputGenerador .number-display, .outputChiCuadrado .number-display {
         width: 35%;
     }
     .estadistico {
@@ -226,7 +224,7 @@ th {
 }
 
 @media (max-width: 1300px) {
-    .output .number-display {
+    .outputGenerador .number-display, .outputChiCuadrado .number-display {
         width: 40%;
     }
     .estadistico {
@@ -235,7 +233,7 @@ th {
 }
 
 @media (max-width: 1000px) {
-    .output .number-display {
+    .outputGenerador .number-display, .outputChiCuadrado .number-display {
         width: 50%;
     }
     .titulo1 {
@@ -247,7 +245,7 @@ th {
 }
 
 @media (max-width: 800px) {
-    .output .number-display {
+    .outputGenerador .number-display, .outputChiCuadrado .number-display {
         width: 60%;
     }
     .titulo1 {
@@ -265,7 +263,7 @@ th {
 }
 
 @media (max-width: 550px) {
-    .output .number-display {
+    .outputGenerador .number-display, .outputChiCuadrado .number-display {
         width: 80%;
     }
     .titulo1 {
@@ -285,7 +283,7 @@ th {
 }
 
 @media (max-width: 400px) {
-    .output .number-display {
+    .outputGenerador .number-display, .outputChiCuadrado .number-display {
         width: 90%;
     }
     .estadistico {
@@ -294,7 +292,7 @@ th {
 }
 
 @media (max-width: 300px) {
-    .output .number-display {
+    .outputGenerador .number-display, .outputChiCuadrado .number-display {
         width: 95%;
     }
     .estadistico {
@@ -324,7 +322,7 @@ section.ok{
     -webkit-transition: all .5s ease-in 3s;
     transition: all .5s ease-in 3s;
     position: absolute;
-    bottom: 30px;
+    top: 120%;
     left: 50%;
     margin-left: -16px;
     display: block;
