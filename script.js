@@ -293,36 +293,8 @@ function mostrarChiCuadrado() {
         conclusion += "de que el generador genera números pseudo aleatorios con distribución uniforme 0 1."
         $(".hipotesisNula").html(conclusion);
         $(".chiCuadrado").show();
-        console.log("DEBERIA MOSTRAR");
     }
 }
-
-/*
-function calcularChiCuadrado() {
-    var elem = document.getElementById("subintervalosGenerador");
-    var subintervalos = Number(elem.value);
-    console.log(subintervalos);
-
-    if(subintervalos > 0) {
-        var listaIntervalos = obtenerIntervalos(subintervalos);
-        
-        var frecuenciasObservadas = frecuencia(listaNumeros,listaIntervalos);
-        var sumatoriaFrecuenciasObservadas = frecuenciasObservadas.reduce(function(a,b){return a + b});
-        var frecuenciaEsperada = sumatoriaFrecuenciasObservadas/subintervalos;
-        var estadistico = obtenerEstadistico(frecuenciasObservadas, frecuenciaEsperada);
-        $(".estadistico").html("ESTADÍSTICO: " + Number(estadistico.toFixed(4)));
-        $(".estadistico").show();
-        var conclusion = "Valor en la Tabla: ";
-        var valorAComparar = tablaChiCuadrado[subintervalos-2]
-        if(estadistico < valorAComparar) {
-            conclusion += valorAComparar + "<br> No rechazamos la hipótesis nula";
-        } else {
-            conclusion += valorAComparar + "<br> Rechazamos la hipótesis nula";
-        }
-        $(".hipotesisNula").html(conclusion);
-        $(".hipotesisNula").show();
-    }
-}*/
 
 
 
@@ -351,7 +323,7 @@ function calcularChiCuadrado() {
 
   $(function() {
     $('.btnAgregar').click (function() {
-      $('html, body').animate({scrollTop: $('section.ok').offset().top }, 'slow');
+      $('html, body').animate({scrollTop: $('section.ok').offset().top }, 'fast');
       return false;
     });
   });
