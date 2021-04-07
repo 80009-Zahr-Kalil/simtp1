@@ -2,8 +2,8 @@
 var constantes = [];
 var x0Actual;
 var registrosActuales;
-var element = document.getElementsByClassName("rellenar")[0];
-var listaNumeros = [];
+var listaNumerosGenerador = [];
+var listaNumerosJS = []; 
 
 var tablaChiCuadrado = [3.841, 5.991, 7.815, 9.488, 11.070, 12.592, 14.067, 
                         15.507, 16.919, 18.307, 19.675, 21.026, 22.362, 
@@ -24,6 +24,9 @@ function desplegarInputGenerador() {
     $(".inputGenerador").show();
     $(".inputChiCuadrado").hide();
     $(".outputChiCuadrado").hide();
+    $(".outputGenerador").show();
+    //$("#chartdiv").hide();
+    //$("#rellenarSerieChiCuadrado").hide();
     flag = "subintervalosGenerador";
 }
 
@@ -106,16 +109,27 @@ function primerosRegistros() {
         if(numero == 1) {
             numero = 0.9999;
         }
-        listaNumeros.push(numero);
+        listaNumerosGenerador.push(numero);
     }
-    return listaNumeros;
+    return listaNumerosGenerador;
 }
 
 
 // Muestra la tabla con los números pseudo aleatorios generados.
 function mostrar() {
-    listaNumeros = [];
-    var arr = primerosRegistros();
+    listaNumerosGenerador = [];
+    var arr;
+    if(flag == "subintervalosGenerador") {
+        arr = primerosRegistros();
+        $(".outputGenerador").hide();
+    }
+    if (flag == "subintervalosChiCuadrado") {
+        arr = generarNumerosJS();
+        $(".outputChiCuadrado").hide();
+    }
+    if(arr.length == 0) {
+        return;
+    }
     var cadena = "<tr class='titulo-tabla'><th>i</th><th>número</th></tr>";
     for(var i=0; i<arr.length; i++) {
         var numeroRandom;
@@ -130,9 +144,17 @@ function mostrar() {
         }
         cadena += '<tr><td>' + (i+1)  + '</td><td>' + numeroRandom + '</td></tr>';
     }
-    $("#rellenar").html(cadena);
-    $(".outputGenerador").show();
-    $(".chiCuadrado").hide();
+    if(flag == "subintervalosGenerador") {
+        $("#rellenarSerieGenerador").html(cadena);
+        $(".outputGenerador").show();
+        $(".cont-pie-pagina").show();
+        $(".chiCuadrado").hide();
+    }
+    if(flag == "subintervalosChiCuadrado") {
+        $("#rellenarSerieChiCuadrado").html(cadena);
+        $(".outputChiCuadrado").show();
+        $("#rellenarSerieChiCuadrado").show();
+    }
     $(".scroll").show();
 }
 
@@ -149,9 +171,9 @@ function agregarRegistro() {
         numeroMostrado = "1.0000";
         nuevoNumeroRandom = 0.9999;
     }
-    listaNumeros.push(nuevoNumeroRandom);
+    listaNumerosGenerador.push(nuevoNumeroRandom);
     var cadena = '<tr><td class="nuevos-registros">' + (registrosActuales)  + '</td><td class="nuevos-registros">' + numeroMostrado + '</td></tr>';
-    document.getElementById("rellenar").insertAdjacentHTML('beforeend', cadena);
+    document.getElementById("rellenarSerieGenerador").insertAdjacentHTML('beforeend', cadena);
     $(".outputGenerador").show();
 }
 
@@ -166,19 +188,21 @@ function desplegarInputChiCuadrado() {
     $(".inputChiCuadrado").show();
     $(".inputGenerador").hide();
     $(".outputGenerador").hide();
-    var limpiarOutput = '<table id="rellenarChiCuadrado" class="number-display animate__animated animate__zoomIn"></table><div class="chiCuadrado"><div class="estadistico animate__animated animate__flipInX">EST</div><div class="hipotesisNula animate__animated animate__fadeIn">HIP</div></div>';
-    $(".outputChiCuadrado").html(limpiarOutput);
+    $(".outputChiCuadrado").show();
     flag = "subintervalosChiCuadrado";
 }
 
 
 // Generar los numeros pseudo aleatorios con el metodo de JS.
 function generarNumerosJS(){
+    listaNumerosJS = [];
     var cantNum = document.getElementById("numerosChiCuadrado").value;
-    var listaNumerosJS = [];
-    for(var i = 0; i<cantNum ; i++){
-        var aleatorioJS = Math.random().toFixed(4);
-        listaNumerosJS.push(Number(aleatorioJS));
+    var subint = document.getElementById("subintervalosChiCuadrado").value;
+    if(cantNum >= 30 && subint >= 5) {
+        for(var i = 0; i<cantNum ; i++){
+            var aleatorioJS = Math.random().toFixed(4);
+            listaNumerosJS.push(Number(aleatorioJS));
+        }
     }
     return listaNumerosJS;
 }
@@ -229,8 +253,8 @@ function obtenerEstadistico(frecuenciasObservadas,frecuenciaEsperada) {
 
 
 // Valida que la cantidad de registros sea mayor o igual a 30.
-function validarChiCuadrado(arr, subintervalos) {
-    if(arr.length < 30 || subintervalos < 5) {
+function validarChiCuadrado(cantidadRegistros, subintervalos) {
+    if(cantidadRegistros < 30 || subintervalos < 5) {
         alert("Para efectuar la prueba de Chi Cuadrado se necesitan un mínimo de 30 números pseudo aleatorios y 5 subintervalos.");
         return false;
     } else {
@@ -243,7 +267,7 @@ function calcularChiCuadrado(subintervalos) {
     var listaIntervalos = obtenerIntervalos(subintervalos);
     var frecuenciasObservadas;
     if(flag == "subintervalosGenerador") {
-        frecuenciasObservadas = frecuencia(listaNumeros, listaIntervalos);
+        frecuenciasObservadas = frecuencia(listaNumerosGenerador, listaIntervalos);
     }
     if(flag == "subintervalosChiCuadrado") {
         var listaNumerosJS = generarNumerosJS();
@@ -257,17 +281,33 @@ function calcularChiCuadrado(subintervalos) {
 
 // debe mostrar la tabla de frecuencias, el estadistico y el histograma
 function mostrarChiCuadrado() {
-    var arrayNumeros;
-    if(flag == "subintervalosGenerador") {
-        arrayNumeros = listaNumeros;
-    }
+    var cantidadRegistros;
+    var tablaFrecuencias;
+    var estadisticoHTML;
+    var chiCuadradoHTML;
+    var hipotesisNulaHTML;
+    var idGrafico;
     if(flag == "subintervalosChiCuadrado") {
-        arrayNumeros = generarNumerosJS();
+        cantidadRegistros = listaNumerosJS.length;
+        tablaFrecuencias = $("#rellenarChiCuadrado");
+        estadisticoHTML = $("#estadisticoChiCuadrado");
+        chiCuadradoHTML = $(".chiCuadradoJs");
+        hipotesisNulaHTML = $("#hipotesisNulaChiCuadrado");
+        idGrafico = "chartChiCuadrado";
+    }
+    if(flag == "subintervalosGenerador") {
+        cantidadRegistros = listaNumerosGenerador.length;
+        tablaFrecuencias = $("#rellenarGenerador");
+        estadisticoHTML = $("#estadisticoGenerador");
+        chiCuadradoHTML = $(".chiCuadradoGenerador");
+        hipotesisNulaHTML = $("#hipotesisNulaGenerador");
+        idGrafico = "chartGenerador";
+        tablaFrecuencias.hide();
     }
 
     var elem = document.getElementById(flag);
     var subintervalos = elem.value;
-    if(validarChiCuadrado(arrayNumeros, subintervalos)) {
+    if(validarChiCuadrado(cantidadRegistros, subintervalos)) {
         var datos = calcularChiCuadrado(subintervalos);
         var listaIntervalos = datos[0];
         var frecuenciasObservadas = datos[1];
@@ -279,10 +319,11 @@ function mostrarChiCuadrado() {
         for(var i = 0; i<listaIntervalos.length; i++){
             cadenaJS += '<tr><td>' + listaIntervalos[i][0].toFixed(2) + '</td><td>' + listaIntervalos[i][1].toFixed(2) + '</td> <td>' + frecuenciasObservadas[i] + '</td><td>' + frecuenciaEsperada.toFixed(2) + '</td></tr>'; 
         }
-        $("#rellenarChiCuadrado").html(cadenaJS);
-        $(".outputChiCuadrado").show();
+        
+        tablaFrecuencias.html(cadenaJS);
+        tablaFrecuencias.show();
 
-        $(".estadistico").html("ESTADÍSTICO: " + Number(estadistico.toFixed(4)));
+        estadisticoHTML.html("ESTADÍSTICO: " + Number(estadistico.toFixed(4)));
         var conclusion = "Valor en la Tabla: ";
         var valorAComparar = tablaChiCuadrado[subintervalos-2]
         if(estadistico < valorAComparar) {
@@ -291,11 +332,123 @@ function mostrarChiCuadrado() {
             conclusion += valorAComparar + "<br> Se rechaza la hipótesis nula ";
         }
         conclusion += "de que el generador genera números pseudo aleatorios con distribución uniforme 0 1."
-        $(".hipotesisNula").html(conclusion);
-        $(".chiCuadrado").show();
+        hipotesisNulaHTML.html(conclusion);
+        chiCuadradoHTML.show();
+        var intervalosString = [];
+        for(var i=0; i<listaIntervalos.length; i++) {
+            intervalosString.push(listaIntervalos[i][0].toFixed(2).toString() + "-" + listaIntervalos[i][1].toFixed(2).toString());
+        }
+        mostrarGrafico(intervalosString, frecuenciasObservadas, frecuenciaEsperada, idGrafico);
     }
+
 }
 
+//mostrarGrafico(["0-19.99", "20-39.99", "40-59.99"], [100, 200, 300], 300);
+function mostrarGrafico(listaIntervalos, frecuenciasObservadas, frecuenciaEsperada, idGrafico) {
+    am4core.ready(function() {
+
+        // Themes begin
+        am4core.useTheme(am4themes_dark);
+        am4core.useTheme(am4themes_animated);
+        // Themes end
+        
+        
+        
+        var chart = am4core.create(idGrafico, am4charts.XYChart)
+        chart.colors.step = 2;
+        
+        chart.legend = new am4charts.Legend()
+        chart.legend.position = 'top'
+        chart.legend.paddingBottom = 20
+        chart.legend.labels.template.maxWidth = 95
+        
+        var xAxis = chart.xAxes.push(new am4charts.CategoryAxis())
+        xAxis.dataFields.category = 'category'
+        xAxis.renderer.cellStartLocation = 0.1
+        xAxis.renderer.cellEndLocation = 0.9
+        xAxis.renderer.grid.template.location = 0;
+        
+        var yAxis = chart.yAxes.push(new am4charts.ValueAxis());
+        yAxis.min = 0;
+        
+        function createSeries(value, name) {
+            var series = chart.series.push(new am4charts.ColumnSeries())
+            series.dataFields.valueY = value
+            series.dataFields.categoryX = 'category'
+            series.name = name
+        
+            series.events.on("hidden", arrangeColumns);
+            series.events.on("shown", arrangeColumns);
+        
+            var bullet = series.bullets.push(new am4charts.LabelBullet())
+            bullet.interactionsEnabled = false
+            bullet.dy = 30;
+            bullet.label.text = '{valueY}'
+            bullet.label.fill = am4core.color('#ffffff')
+        
+            return series;
+        }
+        
+        chart.data = [
+            {
+                category: "",
+                first: 0,
+                second: 0
+            }
+        ]
+
+        for(var i=0; i<listaIntervalos.length; i++) {
+            chart.data[i] = {
+                category: listaIntervalos[i],
+                first: frecuenciasObservadas[i],
+                second: frecuenciaEsperada}
+        }
+        
+        
+        createSeries('first', 'Frecuencia Observada');
+        createSeries('second', 'Frecuencia Esperada');
+        
+        function arrangeColumns() {
+        
+            var series = chart.series.getIndex(0);
+        
+            var w = 1 - xAxis.renderer.cellStartLocation - (1 - xAxis.renderer.cellEndLocation);
+            if (series.dataItems.length > 1) {
+                var x0 = xAxis.getX(series.dataItems.getIndex(0), "categoryX");
+                var x1 = xAxis.getX(series.dataItems.getIndex(1), "categoryX");
+                var delta = ((x1 - x0) / chart.series.length) * w;
+                if (am4core.isNumber(delta)) {
+                    var middle = chart.series.length / 2;
+        
+                    var newIndex = 0;
+                    chart.series.each(function(series) {
+                        if (!series.isHidden && !series.isHiding) {
+                            series.dummyData = newIndex;
+                            newIndex++;
+                        }
+                        else {
+                            series.dummyData = chart.series.indexOf(series);
+                        }
+                    })
+                    var visibleCount = newIndex;
+                    var newMiddle = visibleCount / 2;
+        
+                    chart.series.each(function(series) {
+                        var trueIndex = chart.series.indexOf(series);
+                        var newIndex = series.dummyData;
+        
+                        var dx = (newIndex - trueIndex + middle - newMiddle) * delta
+        
+                        series.animate({ property: "dx", to: dx }, series.interpolationDuration, series.interpolationEasing);
+                        series.bulletsContainer.animate({ property: "dx", to: dx }, series.interpolationDuration, series.interpolationEasing);
+                    })
+                }
+            }
+        }
+        
+    }); // end am4core.ready()
+    $("#"+idGrafico).show();
+}
 
 
 // FUNCION SCROLL DOWN
@@ -344,7 +497,10 @@ VanillaTilt.init(document.querySelectorAll(".box"), {
 });
 
 
-document.getElementById("btnGenerador").addEventListener('click', desplegarInputGenerador)
+document.getElementById("btnGenerador").addEventListener('click', function() {
+    desplegarInputGenerador();
+    $(".scroll").hide();
+})
 
 document.getElementById("btnGeneradorMixto").addEventListener("click", mostrar);
 document.getElementById("btnGeneradorMultiplicativo").addEventListener("click", mostrar);
@@ -352,7 +508,11 @@ document.getElementById("btnGeneradorMultiplicativo").addEventListener("click", 
 document.getElementById("btnAgregar").addEventListener("click", agregarRegistro);
 
 document.getElementById("btnValidarChiCuadrado").addEventListener("click", function(){
-    $(".chiCuadrado").show();
+    //$(".chiCuadradoInput").html('Cantidad de Subintervalos: <input type="text" id="subintervalosGenerador" size="2"><button class="btn btn2" id="btnCalcularChiCuadrado">Calcular</button>');
+    $(".chiCuadradoInput").show();
+    //$("#rellenarGenerador").hide();
+    //$(".chiCuadradoGenerador").hide();
+    //$("#chartGenerador").hide();
 });
 
 document.getElementById("btnCalcularChiCuadrado").addEventListener("click", mostrarChiCuadrado);
@@ -362,6 +522,9 @@ document.getElementById("btnChiCuadrado").addEventListener("click", function(){
     $(".scroll").hide();
 });
 
-document.getElementById("btnGenerarChiCuadrado").addEventListener("click", mostrarChiCuadrado);
+document.getElementById("btnGenerarChiCuadrado").addEventListener("click", function() {
+    mostrar();
+    mostrarChiCuadrado();
+});
 
 

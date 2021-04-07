@@ -65,25 +65,37 @@
     </div>
 
     <div class="outputGenerador">
-        <table id="rellenar" class="number-display animate__animated animate__zoomIn">
+        <table id="rellenarSerieGenerador" class="number-display animate__animated animate__zoomIn">
             
         </table>
         <br>
-        <div class="referencias">
-            <div><div class="square referencia-blanco"></div> Registros Originales</div>
+        <div class="cont-pie-pagina">
+            <div class="referencias">
+                <div><div class="square referencia-blanco"></div> Registros Originales</div>
+                <br>
+                <div><div class="square referencia-rojo"></div> Registros Nuevos</div>
+            </div>
             <br>
-            <div><div class="square referencia-rojo"></div> Registros Nuevos</div>
+            <div class="buttons">
+                <button class="btn btnAgregar" id="btnAgregar">Agregar Registro</button>
+                <button class="btn btnChi" id="btnValidarChiCuadrado">Chi Cuadrado</button>
+            </div>
         </div>
         <br>
-        <div class="buttons">
-            <button class="btn btnAgregar" id="btnAgregar">Agregar Registro</button>
-            <button class="btn btnChi" id="btnValidarChiCuadrado">Chi Cuadrado</button>
-        </div>
-        <br>
-        <div class="chiCuadrado animate__animated animate__bounce">
+        <div class="chiCuadradoInput animate__animated animate__bounce">
             Cantidad de Subintervalos: <input type="text" id="subintervalosGenerador" size="2">
             <button class="btn btn2" id="btnCalcularChiCuadrado">Calcular</button>
         </div>
+
+        <table id="rellenarGenerador" class="number-display animate__animated animate__zoomIn">
+            
+        </table>
+        <div class="chiCuadradoGenerador">
+            <div id="estadisticoGenerador" class="estadistico animate__animated animate__flipInX"></div>
+            <div id="hipotesisNulaGenerador" class="hipotesisNula animate__animated animate__fadeIn"></div>
+        </div>
+
+        <div id="chartGenerador" class="chartdiv"></div>
     </div>
 
     <div class="inputChiCuadrado animate__animated animate__fadeIn display">
@@ -95,14 +107,22 @@
     </div>
 
     <div class="outputChiCuadrado">
+        <table id="rellenarSerieChiCuadrado" class="number-display animate__animated animate__zoomIn">
+
+        </table>
+        <br>
+        <br>
         <table id="rellenarChiCuadrado" class="number-display animate__animated animate__zoomIn">
             
         </table>
-
-        <div class="chiCuadrado">
-            <div class="estadistico animate__animated animate__flipInX"></div>
-            <div class="hipotesisNula animate__animated animate__fadeIn"></div>
+        <br>
+        <div class="chiCuadradoJs">
+            <div id="estadisticoChiCuadrado" class="estadistico animate__animated animate__flipInX"></div>
+            <div id="hipotesisNulaChiCuadrado" class="hipotesisNula animate__animated animate__fadeIn"></div>
         </div>
+        <br>
+        <div id="chartChiCuadrado" class="chartdiv"></div>
+        
     </div>
 
     <section class="scroll">
@@ -116,6 +136,10 @@
         crossorigin="anonymous">
     </script>
     <script src="vanilla-tilt.min.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/dark.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
