@@ -149,11 +149,17 @@ function mostrar() {
         $(".outputGenerador").show();
         $(".cont-pie-pagina").show();
         $(".chiCuadrado").hide();
+        $("#rellenarGenerador").hide();
+        $("#chartGenerador").hide();
+        $(".chiCuadradoGenerador").hide();
+        $(".chiCuadradoInput").hide();
     }
     if(flag == "subintervalosChiCuadrado") {
         $("#rellenarSerieChiCuadrado").html(cadena);
         $(".outputChiCuadrado").show();
         $("#rellenarSerieChiCuadrado").show();
+        $("#rellenarChiCuadrado").hide();
+        $(".chiCuadradoJs").hide();
     }
     $(".scroll").show();
 }
@@ -317,38 +323,37 @@ function mostrarChiCuadrado() {
         var cadenaJS = "<tr class='titulo-tabla'><th>Desde</th><th>Hasta</th><th>Frecuencia observada</th><th>Frecuencia Esperada</th></tr>";
         
         for(var i = 0; i<listaIntervalos.length; i++){
-            cadenaJS += '<tr><td>' + listaIntervalos[i][0].toFixed(2) + '</td><td>' + listaIntervalos[i][1].toFixed(2) + '</td> <td>' + frecuenciasObservadas[i] + '</td><td>' + frecuenciaEsperada.toFixed(2) + '</td></tr>'; 
+            cadenaJS += '<tr><td>' + (listaIntervalos[i][0]/100).toFixed(2) + '</td><td>' + (listaIntervalos[i][1]/100).toFixed(2) + '</td> <td>' + frecuenciasObservadas[i] + '</td><td>' + frecuenciaEsperada.toFixed(2) + '</td></tr>'; 
         }
         
         tablaFrecuencias.html(cadenaJS);
         tablaFrecuencias.show();
 
         estadisticoHTML.html("ESTADÍSTICO: " + Number(estadistico.toFixed(4)));
-        var conclusion = "Valor en la Tabla: ";
+        var conclusion = "Valor en la Tabla con nivel de Significancia 0,95: ";
         var valorAComparar = tablaChiCuadrado[subintervalos-2]
         if(estadistico < valorAComparar) {
             conclusion += valorAComparar + "<br> No se rechaza la hipótesis nula ";
         } else {
             conclusion += valorAComparar + "<br> Se rechaza la hipótesis nula ";
         }
-        conclusion += "de que el generador genera números pseudo aleatorios con distribución uniforme 0 1."
+        conclusion += "de que el generador genera números pseudo aleatorios con distribución uniforme (0;1)."
         hipotesisNulaHTML.html(conclusion);
         chiCuadradoHTML.show();
 
-        var agrupaciones = 0;
-        var contador = 0;
-        for(var i=0; i<frecuenciasObservadas.length; i++) {
-            contador += frecuenciaEsperada;
-            agrupaciones++;
-            if(contador >= 5) {
-                break;
-            }
-        }
+        // var contador = 0;
+        // for(var i=0; i<frecuenciasObservadas.length; i++) {
+        //     contador += frecuenciaEsperada;
+        //     agrupaciones++;
+        //     if(contador >= 5) {
+        //         break;
+        //     }
+        // }
 
 
         var intervalosString = [];
         for(var i=0; i<listaIntervalos.length; i++) {
-            intervalosString.push(listaIntervalos[i][0].toFixed(2).toString() + "-" + listaIntervalos[i][1].toFixed(2).toString());
+            intervalosString.push((listaIntervalos[i][0]/100).toFixed(2).toString() + "-" + (listaIntervalos[i][1]/100).toFixed(2).toString());
         }
         mostrarGrafico(intervalosString, frecuenciasObservadas, frecuenciaEsperada, idGrafico);
     }
@@ -520,11 +525,7 @@ document.getElementById("btnGeneradorMultiplicativo").addEventListener("click", 
 document.getElementById("btnAgregar").addEventListener("click", agregarRegistro);
 
 document.getElementById("btnValidarChiCuadrado").addEventListener("click", function(){
-    //$(".chiCuadradoInput").html('Cantidad de Subintervalos: <input type="text" id="subintervalosGenerador" size="2"><button class="btn btn2" id="btnCalcularChiCuadrado">Calcular</button>');
     $(".chiCuadradoInput").show();
-    //$("#rellenarGenerador").hide();
-    //$(".chiCuadradoGenerador").hide();
-    //$("#chartGenerador").hide();
 });
 
 document.getElementById("btnCalcularChiCuadrado").addEventListener("click", mostrarChiCuadrado);
