@@ -334,6 +334,18 @@ function mostrarChiCuadrado() {
         conclusion += "de que el generador genera números pseudo aleatorios con distribución uniforme 0 1."
         hipotesisNulaHTML.html(conclusion);
         chiCuadradoHTML.show();
+
+        var agrupaciones = 0;
+        var contador = 0;
+        for(var i=0; i<frecuenciasObservadas.length; i++) {
+            contador += frecuenciaEsperada;
+            agrupaciones++;
+            if(contador >= 5) {
+                break;
+            }
+        }
+
+
         var intervalosString = [];
         for(var i=0; i<listaIntervalos.length; i++) {
             intervalosString.push(listaIntervalos[i][0].toFixed(2).toString() + "-" + listaIntervalos[i][1].toFixed(2).toString());
@@ -343,7 +355,7 @@ function mostrarChiCuadrado() {
 
 }
 
-//mostrarGrafico(["0-19.99", "20-39.99", "40-59.99"], [100, 200, 300], 300);
+// Arma el grafico.
 function mostrarGrafico(listaIntervalos, frecuenciasObservadas, frecuenciaEsperada, idGrafico) {
     am4core.ready(function() {
 

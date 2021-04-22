@@ -147,7 +147,7 @@ select {
     font-family: 'Fjalla One', sans-serif;
     width: 30%;
     margin: auto;
-    background: rgb(197, 143, 42);
+    background: rgb(93, 109, 126);
     text-align: center;
     border-collapse: collapse;
 }
@@ -157,7 +157,7 @@ td, th {
     padding: 8px;
 }
 th {
-    background: rgb(206, 206, 35);
+    background: rgb(22, 88, 143);
     color: black;
 }
 
@@ -177,11 +177,11 @@ th {
     background-color: white;
 }
 .referencia-rojo {
-    background-color: red;
+    background-color: yellow;
   }
 
 .nuevos-registros {
-    color: red;
+    color: yellow;
 }
 
 .outputGenerador .buttons {
